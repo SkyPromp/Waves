@@ -3,7 +3,7 @@ from math import pi
 
 
 class Wave:
-    def __init__(self, r, c, frequency, wavelength=100, amplitude=127):
+    def __init__(self, r, c, frequency=0.05, wavelength=100, amplitude=127):
         self.amplitude = amplitude
         self.r = r
         self.c = c
@@ -16,7 +16,7 @@ class Wave:
     #     return f"{self.amplitude} * sin(2 * pi / {self.wavelength} * (x + {self.wavelength} * {self.frequency} * t) + {self.shift})"
 
     def next(self, r, c, time):
-        return 128 + self.amplitude * \
+        return self.amplitude * \
                sin(
                    (2 * pi / self.wavelength) * (self.getDist(r, c) + self.wavelength * self.frequency * time) + self.shift
                )
