@@ -1,5 +1,6 @@
 from math import sin
 from math import pi
+from math import sqrt
 
 
 class Wave:
@@ -11,18 +12,21 @@ class Wave:
         # self.max_distance = 0
         self.wavelength = wavelength
         self.shift = 0
+        self.pi2length = 2 * pi / self.wavelength
+        self.freqlength = self.frequency * self.wavelength
 
     # def __repr__(self):
     #     return f"{self.amplitude} * sin(2 * pi / {self.wavelength} * (x + {self.wavelength} * {self.frequency} * t) + {self.shift})"
 
     def next(self, r, c, time):
-        return self.amplitude * \
-               sin(
-                   (2 * pi / self.wavelength) * (self.getDist(r, c) + self.wavelength * self.frequency * time) + self.shift
-               )
+        dr = r - self.r
+        dc = c - self.c
+        return self.amplitude * sin(self.pi2length * (sqrt(dr * dr + dc * dc) + self.freqlength * time) + self.shift)
 
-    def getDist(self, r, c):
-        return ((r - self.r) ** 2 + (c - self.c) ** 2) ** 0.5
+    # def getDist(self, r, c):
+    #     dr = r - self.r
+    #     dc = c - self.c
+    #     return sqrt(dr * dr + dc * dc)
 
     # def isMaxDist(self, r, c):
     #     if self.getDist(r, c) == self.max_distance:
